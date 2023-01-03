@@ -1,4 +1,3 @@
-const { link } = require("fs");
 
 const button = document.getElementById('analyze');
 const loader = document.getElementById('loader');
@@ -11,7 +10,9 @@ const twitter = document.getElementById('twitter');
 const facebook = document.getElementById('facebook');
 const linkedin = document.getElementById('linkedin');
 const angellist = document.getElementById('youtube');
-
+const employees = document.getElementById('employees');
+const revenue = document.getElementById('revenue');
+const address = document.getElementById('address');
 
 button.addEventListener('click', async () => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -32,10 +33,13 @@ button.addEventListener('click', async () => {
 
 function displayResult(response) {
     loader.style.display = 'none';
+    revenue.innerHTML = response.revenue;
     companyName.innerHTML = response.name;
     alexaRanking.innerHTML = response.alexaRank;
     industry.innerHTML = response.industry;
     description.innerHTML = response.description;
+    employees.innerHTML = response.totalEmployeesExact;
+    address.innerHTML = response.city.address;
     logo.src = response.logo;
     facebook.href = response.facebook;
     linkedin.href = response.linkedin;
